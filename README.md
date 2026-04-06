@@ -1,6 +1,7 @@
 # Automated-PCAP-Scanner
 
-Automated PCAP Scanner is a Python-based network traffic analysis tool that scans `.pcap` files using PyShark and predefined Wireshark display filters to detect suspicious traffic patterns, reconnaissance activity, scanning behaviour, and selected attack indicators. It is designed to reduce repetitive manual filtering during packet analysis and speed up investigation workflows. 
+A Python-based tool for automated analysis of `.pcap` network capture files using **PyShark** and **Wireshark display filters**. Designed to help blue-teamers, students, and network forensics practitioners quickly identify common attack signatures in captured traffic.
+
 ---
 ## Overview 
 Manually loading a PCAP into Wireshark, trying different display filters, and hunting through results can be slow and repetitive, especially when you want to check for multiple attack patterns. Wireshark’s display filter language is powerful, but you normally have to apply each filter one at a time through the GUI.
