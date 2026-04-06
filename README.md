@@ -1,36 +1,25 @@
 # Automated-PCAP-Scanner
 Automated PCAP Scanner is a Python-based network traffic analysis tool that scans `.pcap` files using PyShark and predefined Wireshark display filters to detect suspicious traffic patterns, reconnaissance activity, scanning behaviour, and selected attack indicators. It is designed to reduce repetitive manual filtering during packet analysis and speed up investigation workflows. 
+---
+## Overview 
+Manually loading a PCAP into Wireshark, trying different display filters, and hunting through results can be slow and repetitive, especially when you want to check for multiple attack patterns. Wireshark’s display filter language is powerful, but you normally have to apply each filter one at a time through the GUI.
+
+Automated PCAP Scanner automates that workflow. It uses PyShark (a Python wrapper for TShark) to run a curated set of Wireshark display filters in a single pass over your capture file, then reports what it finds for each category (reconnaissance, scans, poisoning, flooding, etc.). Instead of spending time typing and re‑typing filters, you run one script and focus on interpreting the results.
+
+This makes it particularly useful for:
+- Quickly triaging PCAPs from labs, CTFs, or assignments.
+- Getting a fast “first look” at what kind of malicious or suspicious activity may be present.
+- Helping beginners see how common attack patterns map to Wireshark display filters.
+
+---
 
 ## Features 
-- Automated analysis of PCAP files using predefined Wireshark display filters.
-- Detection of common reconnaissance and scan patterns such as ARP scans, ICMP sweeps, TCP SYN scans, FIN scans, NULL scans, and Xmas scans.
-- Identification of suspicious behaviours, including ARP poisoning, ICMP flooding, VLAN hopping, and packet retransmission issues.
-- Support for protocol-level traffic inspection, including HTTP, HTTPS/TLS, TCP, UDP, and ICMP.
-- Useful for learning, lab environments, packet triage, and basic network forensic workflows.
-
-Included detection areas:
-
-- HTTP and HTTPS/TLS traffic
-- IP address filtering
-- TCP and UDP port filtering
-- ARP scanning
-- IP protocol scans
-- ICMP ping sweeps
-- TCP and UDP ping sweeps
-- TCP SYN stealth scans
-- TCP connect scans
-- TCP NULL scans
-- TCP FIN scans
-- TCP Xmas scans
-- UDP port scans
-- ARP poisoning
-- ICMP flooding
-- VLAN hopping
-- TCP retransmissions and packet loss
-- Client de-authentication
-- Client disassociation
-- Fake AP beacon floods
-- Authentication DoS
+- **Automated display filtering**: Runs multiple Wireshark display filters in one go, instead of manually applying them one by one in the GUI, saving time on repetitive analysis work.
+ **Reconnaissance & scan detection**: Checks for ARP scans, ICMP ping sweeps, TCP/UDP ping sweeps, SYN/FIN/NULL/Xmas scans, and UDP port scan patterns using ICMP responses.
+- **Attack indicators**: Looks for ARP poisoning, ICMP flooding, VLAN hopping hints, and TCP retransmission/loss that might signal instability or scanning side effects.
+- **Wireless attack patterns**:Includes filters for de‑authentication, disassociation, fake beacon floods, and authentication DoS in 802.11 captures.
+- **Simple to extend**: All detections live in a single Python dictionary of {name: wireshark_display_filter}, so you can add or modify filters without changing core logic.
+​- **CLI-friendly**: Works as a simple script: point it at a PCAP, run it, and review the printed results.
 
 ---
 
@@ -39,6 +28,8 @@ Included detection areas:
 - Python 3
 - PyShark
 - Wireshark
+
+---
 
 ## Installation
 
@@ -61,19 +52,14 @@ sudo apt install wireshark
 **Windows** 
 Install Wireshark from the official installer and make sure TShark is included during installation. 
 
+---
 ## Project Structure
 
 ```
 Automated-PCAP-Scanner/
 │
 ├── automated_pcap_scanner.py
-├── README.md
-└── requirements.txt
-```
-
-**`requirements.txt`**
-```
-pyshark
+└──  README.md
 ```
 
 ---
@@ -169,7 +155,7 @@ The scanner uses a dictionary of named Wireshark display filters covering a broa
 
 ## Disclaimer
 
-This project is intended for **educational, defensive, and authorized analysis purposes only**. Do not use it on systems, networks, or data you do not have explicit permission to inspect. The author accepts no responsibility for misuse.
+This project is intended for **educational, defensive, and authorised analysis purposes only**. Do not use it on systems, networks, or data you do not have explicit permission to inspect. The author accepts no responsibility for misuse.
 
 ---
 
